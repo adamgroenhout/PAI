@@ -16,7 +16,7 @@
 ![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-8B5CF6)
 ![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
+[![Gemini CLI](https://img.shields.io/badge/Powered%20by-Gemini%20CLI-blue)](https://ai.google.dev/docs/gemini_api_overview)
 [![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
 
 <br/>
@@ -36,32 +36,16 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **[🎉 v0.2.1 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.1)** - Hooks System Update with portable installation support
+> **[🎉 v0.3.0 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.3.0)** - Gemini CLI Migration
 
 <details open>
-<summary><strong>📅 September 26, 2025 - Hooks System Update</strong></summary>
+<summary><strong>📅 September 27, 2025 - Gemini CLI Migration</strong></summary>
 
-- 🪝 **Hooks Sanitized**: Updated all hook files to be public-ready with no sensitive data
-- 🔧 **Path Portability**: All hooks now use `${PAI_DIR}` variable for installation-agnostic paths
-- 🎯 **Session Management**: Updated session-start-hook for proper initialization
-- 🎙️ **Voice Integration**: Enhanced stop-hook with intelligent voice responses and tab titles
-- 📝 **Subagent Support**: Improved subagent-stop-hook for agent-specific voice notifications
-- 🔌 **Dynamic Loading**: Updated load-dynamic-requirements wrapper for proper context loading
-- 🚀 **Ready for Distribution**: All hooks verified clean and ready for public PAI distribution
-
-</details>
-
-<details>
-<summary><strong>📅 September 25, 2025 - Voice Output Format & Bug Fix</strong></summary>
-
-- 🎯 **Mandatory Format**: Enforced structured response format for voice integration
-- 🔊 **Voice System**: Fixed voice notification system breaking due to inconsistent output
-- 🐛 **Field Name Fix**: Fixed stop-hook.ts sending wrong field names (`text`/`voiceId` → `message`/`voice_id`)
-- 📋 **Response Structure**: All responses now use mandatory emoji headers with COMPLETED line
-- 🪝 **Hook Integration**: COMPLETED line properly triggers voice notifications with correct field names
-- ⚡ **Consistency**: Format applies to all responses, even simple answers
-- 📝 **Documentation**: Added comprehensive voice-system.md documentation
-- 📝 **Context Updates**: Updated both local and PAI CLAUDE.md files with strict enforcement
+- 🚀 **Gemini CLI**: Migrated the entire PAI system to be based on Gemini CLI.
+- 🔧 **TOML Configuration**: Converted all agent and system configurations to TOML format.
+- 🧠 **Refactored Context Management**: Updated the context management system to work with Gemini CLI's `GEMINI.md` files.
+- 🗑️ **Removed Hook System**: Removed the entire hook system, which is not supported by Gemini CLI.
+- 📝 **Updated Documentation**: Updated all documentation to reflect the new Gemini CLI-based architecture.
 
 </details>
 
@@ -72,7 +56,7 @@
 - 🎨 **DA_COLOR Variable**: Color now configurable via `DA_COLOR` environment variable
 - 📝 **Clean Separation**: `DA` handles the name, `DA_COLOR` handles the display color
 - 🎨 **Color Options**: purple (default), blue, green, cyan, magenta, yellow, red, orange
-- ⚙️ **Configuration**: Add to `.zshrc`:
+- ⚙️ **Configuration**: Add to `.bashrc`:
   ```bash
   export DA="YourAssistantName"    # Defaults to "Assistant"
   export DA_COLOR="purple"         # Choose your color
@@ -95,10 +79,9 @@
 <summary><strong>📅 September 21, 2025 - v0.1 Release</strong></summary>
 
 - 🎉 **Release**: Published v0.1 - Initial public release
-- 🔒 **Voice**: Hardened the voice server
 - 🏠 **Portability**: PAI_HOME support eliminates hardcoded paths
 - 📚 **Docs**: Comprehensive documentation under `${PAI_DIR}/documentation/`
-- 🔌 **Dynamic**: MCP detection via `settings.json`
+- 🔌 **Dynamic**: MCP detection via `settings.toml`
 - 🏗️ **Architecture**: Complete system documentation with examples
 
 </details>
@@ -106,15 +89,9 @@
 <details>
 <summary><strong>📅 Previous Updates</strong></summary>
 
-**September 20, 2025**
-- 🗣️ Added `/voice-server` with ElevenLabs integration
-- 🔧 Fixed hardcoded path issues
-- 🪝 Working on missing hooks
-
 **September 12, 2025**  
 - 🧠 Dynamic resource loading system
-- ⚡ Submit-user-hook for context loading
-- 🗺️ Dynamic routing via load-dynamic-requirements
+- 🗺️ Dynamic routing via `context-manager.ts`
 
 </details>
 
@@ -248,7 +225,7 @@ PAI is part of the journey toward Human 3.0—where humans are augmented by AI t
 
 - **🔓 Open Framework**: No vendor lock-in, complete transparency, you own everything
 - **🌍 Universal**: Works for anyone, anywhere, in any profession or life situation
-- **🤖 Platform Independent**: Core structure works with Claude, GPT, Gemini, or any AI platform
+- **🤖 Platform Independent**: Core structure works with Gemini, GPT, Claude, or any AI platform
 - **🧠 Persistent Memory**: Your AI remembers every context, project, and conversation
 - **🎯 Task Agnostic**: From writing a blog to tracking medical data to running a business
 - **📁 Plain Text**: All configuration in human-readable files you can edit and understand
@@ -264,10 +241,10 @@ PAI is part of the journey toward Human 3.0—where humans are augmented by AI t
 
 ```mermaid
 graph TD
-    User[👤 You] --> Hooks[🪝 Dynamic Hooks]
+    User[👤 You] --> GeminiCLI[🚀 Gemini CLI]
     
-    Hooks --> UFC[📁 UFC Context System]
-    Hooks --> Commands[⚡ Custom Commands]
+    GeminiCLI --> UFC[📁 UFC Context System]
+    GeminiCLI --> Commands[⚡ Custom Commands]
     
     UFC --> Projects[🧠 Projects]
     UFC --> Life[🏠 Life Context]
@@ -286,7 +263,7 @@ graph TD
     MCPs --> Output
     
     style User fill:#1f2937,stroke:#10b981,stroke-width:2px,color:#e5e7eb
-    style Hooks fill:#111827,stroke:#8b5cf6,stroke-width:2px,color:#e5e7eb
+    style GeminiCLI fill:#111827,stroke:#8b5cf6,stroke-width:2px,color:#e5e7eb
     style Output fill:#111827,stroke:#ef4444,stroke-width:2px,color:#e5e7eb
 ```
 
@@ -372,34 +349,9 @@ ${PAI_DIR}/context/
 | **🏗️ Architect** | System design | Diagrams, PRDs | Technical planning |
 
 **Enhanced with:**
-- 🎙️ ElevenLabs voice synthesis
 - ⚡ Task parallelization
 - 🔌 Deep tool integration
 
-### 🪝 **Dynamic Hook System**
-
-<table>
-<tr>
-<td width="50%">
-
-**📥 Context Loading Hooks:**
-- `submit-user-hook` - Loads context by intent
-- `load-dynamic-requirements` - Smart routing
-- Automatic agent selection
-- Domain-specific knowledge injection
-
-</td>
-<td width="50%">
-
-**🔧 Integration Hooks:**
-- Pre/post command execution
-- Error handling and recovery  
-- Rate limiting and validation
-- Security scanning
-
-</td>
-</tr>
-</table>
 
 ### 🔌 **MCP Server Ecosystem**
 
@@ -435,8 +387,6 @@ ${PAI_DIR}/context/
 <td>
 
 **💬 Communication**
-- ElevenLabs TTS
-- OpenAI Voice
 - Discord bots
 - Email/SMS
 
@@ -449,7 +399,7 @@ ${PAI_DIR}/context/
 ## 🚀 **Quick Start**
 
 > [!NOTE]
-> PAI was originally built with [Claude Code](https://claude.ai/code), but the architecture supports any AI platform (GPT, Gemini, etc.)
+> PAI is now built with [Gemini CLI](https://ai.google.dev/docs/gemini_api_overview), but the architecture supports any AI platform (GPT, Claude, etc.)
 > Requires [Bun](https://bun.sh) JavaScript runtime for the current implementation.
 
 ### **Installation**
@@ -460,8 +410,8 @@ ${PAI_DIR}/context/
 # Install Bun (JavaScript runtime)
 brew install oven-sh/bun/bun 
 
-# Get Claude Code (AI interface)
-# Visit: https://claude.ai/code
+# Get Gemini CLI (AI interface)
+# Visit: https://ai.google.dev/docs/gemini_api_overview
 ```
 
 #### **Step 2: Clone PAI Repository**
@@ -471,8 +421,8 @@ brew install oven-sh/bun/bun
 git clone https://github.com/danielmiessler/PAI.git
 cd PAI
 
-# Note: .claude directory is hidden by default
-ls -la  # See all files including .claude
+# Note: .gemini directory is hidden by default
+ls -la  # See all files including .gemini
 ```
 
 #### **Step 3: Configure PAI Directory Variable** ⚠️ **IMPORTANT**
@@ -482,18 +432,18 @@ ls -la  # See all files including .claude
 > This makes the PAI system completely agnostic to your installation location.
 
 ```bash
-# Add to your shell config (~/.zshrc or ~/.bashrc)
+# Add to your shell config (~/.bashrc)
 # Replace /path/to/PAI with YOUR actual PAI installation path
-export PAI_DIR="/path/to/PAI/.claude"  # Point to the .claude directory in your PAI installation
+export PAI_DIR="/path/to/PAI/.gemini"  # Point to the .gemini directory in your PAI installation
 export PAI_HOME="$HOME"  # Your home directory
 
 # Example (adjust to YOUR installation path):
-# export PAI_DIR="$HOME/Projects/PAI/.claude"
-# export PAI_DIR="$HOME/Documents/PAI/.claude"
-# export PAI_DIR="/Users/yourname/PAI/.claude"
+# export PAI_DIR="$HOME/Projects/PAI/.gemini"
+# export PAI_DIR="$HOME/Documents/PAI/.gemini"
+# export PAI_DIR="/Users/yourname/PAI/.gemini"
 
 # Reload your shell configuration
-source ~/.zshrc  # or source ~/.bashrc
+source ~/.bashrc
 ```
 
 #### **Step 4: Configure Environment**
@@ -504,7 +454,6 @@ cp .env.example ~/.env
 
 # Add your API keys (optional but recommended)
 vim ~/.env
-# Add: ELEVENLABS_API_KEY="your_key_here"
 # Add: OPENAI_API_KEY="your_key_here"
 ```
 
@@ -514,10 +463,7 @@ vim ~/.env
 # Navigate to PAI directory
 cd ${PAI_DIR}
 
-# Optional: Start voice server for audio notifications
-cd voice-server && ./install.sh && ./start.sh
-
-# Open Claude Code and start using PAI!
+# Open Gemini CLI and start using PAI!
 # Your personal AI infrastructure is ready 🚀
 ```
 
@@ -525,13 +471,11 @@ cd voice-server && ./install.sh && ./start.sh
 
 ```bash
 # Required - MUST be configured for PAI to work properly
-PAI_DIR="/path/to/PAI/.claude"    # PAI's .claude directory (system agnostic)
+PAI_DIR="/path/to/PAI/.gemini"    # PAI's .gemini directory (system agnostic)
 PAI_HOME="$HOME"                  # Your home directory
 
 # Optional API Keys
-ELEVENLABS_API_KEY="your_key"     # Voice synthesis
 OPENAI_API_KEY="your_key"         # GPT integration
-PORT="8888"                        # Voice server port
 
 # Digital Assistant Customization
 DA="YourAssistantName"            # Your AI assistant's name (default: "Assistant")
@@ -539,7 +483,7 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 ```
 
 > [!TIP]
-> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and hooks reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `.claude` directory, everything will work seamlessly.
+> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and other components reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `.gemini` directory, everything will work seamlessly.
 
 ---
 
@@ -552,8 +496,7 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 | [Quick Start](#-quick-start) | Get up and running | 5 min |
 | [Architecture](#-architecture) | Understand the system | 10 min |
 | [SECURITY.md](./SECURITY.md) | Security guidelines | 5 min |
-| [Voice Server](./.claude/voice-server/README.md) | Enable voice interaction | 10 min |
-| [Commands Directory](./.claude/commands/) | Browse all commands | 15 min |
+| [Commands Directory](./.gemini/commands/) | Browse all commands | 15 min |
 
 </div>
 
