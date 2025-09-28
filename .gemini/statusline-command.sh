@@ -69,7 +69,7 @@ cache_needs_update=false
 if [ ! -f "$CACHE_FILE" ] || [ -z "$daily_tokens" ]; then
     cache_needs_update=true
 elif [ -f "$CACHE_FILE" ]; then
-    cache_age=$(($(date +%s) - $(stat -f%m "$CACHE_FILE" 2>/dev/null || echo 0)))
+    cache_age=$(($(date +%s) - $(stat -c%Y "$CACHE_FILE" 2>/dev/null || echo 0)))
     if [ $cache_age -ge $CACHE_AGE ]; then
         cache_needs_update=true
     fi
@@ -81,13 +81,10 @@ if [ "$cache_needs_update" = true ]; then
         # We got the lock - update cache with timeout
         if command -v bunx >/dev/null 2>&1; then
             # Run pai-usage with a timeout (5 seconds for faster updates)
-            # Check if gtimeout is available (macOS), otherwise try timeout (Linux)
-            if command -v gtimeout >/dev/null 2>&1; then
-                pai_usage_output=$(gtimeout 5 bunx pai-usage 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | grep "│ Total" | head -1)
-            elif command -v timeout >/dev/null 2>&1; then
+            if command -v timeout >/dev/null 2>&1; then
                 pai_usage_output=$(timeout 5 bunx pai-usage 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | grep "│ Total" | head -1)
             else
-                # Fallback without timeout (but faster than before)
+                # Fallback without timeout
                 pai_usage_output=$(bunx pai-usage 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | grep "│ Total" | head -1)
             fi
 
@@ -117,7 +114,7 @@ if [ "$cache_needs_update" = true ]; then
     else
         # Someone else is updating - check if lock is stale (older than 30 seconds)
         if [ -d "$LOCK_FILE" ]; then
-            lock_age=$(($(date +%s) - $(stat -f%m "$LOCK_FILE" 2>/dev/null || echo 0)))
+            lock_age=$(($(date +%s) - $(stat -c%Y "$LOCK_FILE" 2>/dev/null || echo 0)))
             if [ $lock_age -gt 30 ]; then
                 # Stale lock - remove it and try again
                 rmdir "$LOCK_FILE" 2>/dev/null

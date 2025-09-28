@@ -1,13 +1,3 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.Spotlight-V100
-.Trashes
-Library
-
 # Environment files
 .env
 .env.local
