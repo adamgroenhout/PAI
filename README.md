@@ -319,7 +319,7 @@ ${PAI_DIR}/context/
 curl -fsSL https://bun.sh/install | bash
 
 # Get Gemini CLI (AI interface)
-# Visit: https://ai.google.dev/docs/gemini_api_overview
+# Visit: https://github.com/google-gemini/gemini-cli
 ```
 
 #### **Step 2: Clone PAI Repository**
