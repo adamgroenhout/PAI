@@ -408,7 +408,7 @@ ${PAI_DIR}/context/
 
 ```bash
 # Install Bun (JavaScript runtime)
-brew install oven-sh/bun/bun 
+curl -fsSL https://bun.sh/install | bash
 
 # Get Gemini CLI (AI interface)
 # Visit: https://ai.google.dev/docs/gemini_api_overview

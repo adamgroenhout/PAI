@@ -4,7 +4,7 @@ Get your Personal AI Infrastructure up and running in minutes!
 
 ## Prerequisites
 
-- **macOS** 11+ (primary platform)
+- **Linux/Unix-like** environment (e.g., Debian, Ubuntu, etc.)
 - **Gemini CLI** or Gemini API access
 - **Bun runtime**
 - **Git** (for version control)
@@ -69,7 +69,7 @@ Create `${PAI_DIR}/context/GEMINI.md`:
 
 ## System Information
 - PAI_DIR: ${PAI_DIR}
-- Platform: macOS
+- Platform: Linux/Unix
 - User: ${USER}
 
 ## Core Instructions

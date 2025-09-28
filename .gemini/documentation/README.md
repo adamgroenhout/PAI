@@ -80,10 +80,9 @@ PAI uses environment variables for configuration:
 
 ## System Requirements
 
-- macOS 11+ (primary support)
+- Linux/Unix-like environment
 - Bun runtime
 - Gemini CLI or API access
-- Optional: SwiftBar for menu indicators
 
 ## Installation
 
