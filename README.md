@@ -225,7 +225,7 @@ PAI is part of the journey toward Human 3.0—where humans are augmented by AI t
 
 - **🔓 Open Framework**: No vendor lock-in, complete transparency, you own everything
 - **🌍 Universal**: Works for anyone, anywhere, in any profession or life situation
-- **🤖 Platform Independent**: Core structure works with Gemini, GPT, Claude, or any AI platform
+- **🤖 Platform Independent**: Core structure works with Gemini, GPT, or any AI platform
 - **🧠 Persistent Memory**: Your AI remembers every context, project, and conversation
 - **🎯 Task Agnostic**: From writing a blog to tracking medical data to running a business
 - **📁 Plain Text**: All configuration in human-readable files you can edit and understand
@@ -399,7 +399,7 @@ ${PAI_DIR}/context/
 ## 🚀 **Quick Start**
 
 > [!NOTE]
-> PAI is now built with [Gemini CLI](https://ai.google.dev/docs/gemini_api_overview), but the architecture supports any AI platform (GPT, Claude, etc.)
+> PAI is now built with [Gemini CLI](https://ai.google.dev/docs/gemini_api_overview), but the architecture supports any AI platform (e.g., GPT, etc.)
 > Requires [Bun](https://bun.sh) JavaScript runtime for the current implementation.
 
 ### **Installation**
