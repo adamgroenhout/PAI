@@ -2,11 +2,11 @@
 
 ## 🔴 PUBLIC REPOSITORY WARNING
 
-**PAI is a PUBLIC version of the personal .claude infrastructure**
+**PAI is a PUBLIC version of the personal .gemini infrastructure**
 
-### NEVER COPY BLINDLY FROM .claude TO PAI
+### NEVER COPY BLINDLY FROM .gemini TO PAI
 
-This repository is **PUBLIC** and visible to everyone on the internet. It's a sanitized, public instance of the personal .claude infrastructure. When moving functionality from .claude to PAI:
+This repository is **PUBLIC** and visible to everyone on the internet. It's a sanitized, public instance of the personal .gemini infrastructure. When moving functionality from .gemini to PAI:
 
 ### ❌ NEVER INCLUDE:
 - Personal API keys or tokens
@@ -38,7 +38,7 @@ This repository is **PUBLIC** and visible to everyone on the internet. It's a sa
 
 ### 📋 TRANSFER CHECKLIST:
 
-When copying from .claude to PAI:
+When copying from .gemini to PAI:
 
 - [ ] Remove all API keys (replace with placeholders)
 - [ ] Remove personal information
@@ -59,7 +59,7 @@ When copying from .claude to PAI:
 
 ### 💡 BEST PRACTICES:
 
-- Keep .claude private and local
+- Keep .gemini private and local
 - PAI should be the generic, public template
 - Use environment variables for all sensitive config
 - Document what needs to be configured by users

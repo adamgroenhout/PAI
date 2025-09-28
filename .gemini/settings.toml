@@ -1,0 +1,114 @@
+schema = "https://json.schemastore.org/pai-settings.json"
+
+[env]
+MCP_API_KEY = "REDACTED"
+DISABLE_INTERLEAVED_THINKING = "true"
+DA = "Kai"
+PAI_DIR = "/Users/daniel/.gemini"
+
+[permissions]
+allow = [
+  "Bash",
+  "Read(*)",
+  "Write(*)",
+  "Edit(*)",
+  "MultiEdit(*)",
+  "Glob(*)",
+  "Grep(*)",
+  "LS(*)",
+  "WebFetch(domain:*)",
+  "WebSearch",
+  "NotebookRead(*)",
+  "NotebookEdit(*)",
+  "TodoWrite(*)",
+  "ExitPlanMode(*)",
+  "Task(*)",
+  "mcp__*",
+]
+deny = [
+  "Bash(rm -rf /)",
+  "Bash(rm -rf /*)",
+  "Bash(rm -rf ~)",
+  "Bash(rm -rf $HOME)",
+  "Bash(sudo rm -rf /)",
+  "Bash(sudo rm -rf /*)",
+  "Bash(fork bomb)",
+  "Bash(dd if=/dev/zero of=/dev/sda)",
+  "Bash(mkfs.ext4 /dev/sda)",
+  "Bash(> /dev/sda)",
+]
+
+enableAllProjectMcpServers = true
+enabledMcpjsonServers = []
+
+[mcpServers.httpx]
+type = "http"
+description = "Use for getting information on web servers or site stack information, like what tech stack a given website is running, and other similar use cases."
+url = "https://httpx-mcp.danielmiessler.workers.dev"
+[mcpServers.httpx.headers]
+"x-api-key" = "REDACTED"
+
+[mcpServers.content]
+type = "http"
+description = "Figuring out any of my (Daniel Miessler's) opinions or blog posts or writing online. This is basically an archive of all my content."
+url = "https://content-mcp.danielmiessler.workers.dev"
+
+[mcpServers.daemon]
+type = "http"
+description = "My personal API for everything in my (Daniel Miessler's) life."
+url = "https://mcp.daemon.danielmiessler.com"
+
+[mcpServers.pai]
+type = "http"
+description = "My personal AI infrastructure (PAI), which is where you should look for any tool where I ask you to do a task that you're not sure how to do. Start by checking here to see if there's a tool for it."
+url = "https://api.danielmiessler.com/mcp/"
+[mcpServers.pai.headers]
+Authorization = "REDACTED"
+
+[mcpServers.naabu]
+type = "http"
+description = "This is a port scanner for finding open ports or services on hosts."
+url = "https://naabu-mcp.danielmiessler.workers.dev"
+[mcpServers.naabu.headers]
+"x-api-key" = "REDACTED"
+
+[mcpServers.brightdata]
+command = "bunx"
+args = [
+  "-y",
+  "@brightdata/mcp",
+]
+[mcpServers.brightdata.env]
+API_TOKEN = "REDACTED"
+
+[mcpServers.stripe]
+command = "npx"
+args = [
+  "-y",
+  "@stripe/mcp",
+  "--tools=all",
+]
+description = "Stripe payment processing and financial operations"
+
+[mcpServers.Ref]
+command = "bunx"
+args = [
+  "@refdotai/mcp",
+]
+description = "Documentation search and reading from public sources and private repositories"
+
+[mcpServers.apify]
+command = "bunx"
+args = [
+  "@apify/actors-mcp-server",
+]
+[mcpServers.apify.env]
+APIFY_TOKEN = "REDACTED"
+description = "Web scraping and automation tools via Apify platform"
+
+[statusLine]
+type = "command"
+command = "bash ${PAI_DIR}/statusline-command.sh"
+
+[feedbackSurveyState]
+lastShownTime = 1754071370324
