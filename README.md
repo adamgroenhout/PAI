@@ -328,9 +328,6 @@ curl -fsSL https://bun.sh/install | bash
 # Clone the PAI repository
 git clone https://github.com/danielmiessler/PAI.git
 cd PAI
-
-# Note: .gemini directory is hidden by default
-ls -la  # See all files including .gemini
 ```
 
 #### **Step 3: Configure PAI Directory Variable** ⚠️ **IMPORTANT**
@@ -340,15 +337,15 @@ ls -la  # See all files including .gemini
 > This makes the PAI system completely agnostic to your installation location.
 
 ```bash
-# Add to your shell config (~/.bashrc)
+# Add to your shell config (e.g., ~/.bashrc, ~/.zshrc)
 # Replace /path/to/PAI with YOUR actual PAI installation path
-export PAI_DIR="/path/to/PAI/.gemini"  # Point to the .gemini directory in your PAI installation
+export PAI_DIR="/path/to/PAI/PAI_DIRECTORY"  # Point to the PAI_DIRECTORY in your PAI installation
 export PAI_HOME="$HOME"  # Your home directory
 
 # Example (adjust to YOUR installation path):
-# export PAI_DIR="$HOME/Projects/PAI/.gemini"
-# export PAI_DIR="$HOME/Documents/PAI/.gemini"
-# export PAI_DIR="/Users/yourname/PAI/.gemini"
+# export PAI_DIR="$HOME/Projects/PAI/PAI_DIRECTORY"
+# export PAI_DIR="$HOME/Documents/PAI/PAI_DIRECTORY"
+# export PAI_DIR="/Users/yourname/PAI/PAI_DIRECTORY"
 
 # Reload your shell configuration
 source ~/.bashrc
@@ -358,10 +355,10 @@ source ~/.bashrc
 
 ```bash
 # Copy environment template
-cp .env.example ~/.env
+cp env-example ${PAI_DIR}/.env
 
 # Add your API keys (optional but recommended)
-vim ~/.env
+vim ${PAI_DIR}/.env
 # Add: OPENAI_API_KEY="your_key_here"
 ```
 
@@ -379,7 +376,7 @@ cd ${PAI_DIR}
 
 ```bash
 # Required - MUST be configured for PAI to work properly
-PAI_DIR="/path/to/PAI/.gemini"    # PAI's .gemini directory (system agnostic)
+PAI_DIR="/path/to/PAI/PAI_DIRECTORY"    # PAI's PAI_DIRECTORY (system agnostic)
 PAI_HOME="$HOME"                  # Your home directory
 
 # Optional API Keys
@@ -391,7 +388,7 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 ```
 
 > [!TIP]
-> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and other components reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `.gemini` directory, everything will work seamlessly.
+> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and other components reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `PAI_DIRECTORY` directory, everything will work seamlessly.
 
 ---
 
@@ -404,7 +401,7 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 | [Quick Start](#-quick-start) | Get up and running | 5 min |
 | [Architecture](#-architecture) | Understand the system | 10 min |
 | [SECURITY.md](./SECURITY.md) | Security guidelines | 5 min |
-| [Commands Directory](./.gemini/commands/) | Browse all commands | 15 min |
+| [Commands Directory](./PAI_DIRECTORY/commands/) | Browse all commands | 15 min |
 
 </div>
 
