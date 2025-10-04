@@ -3,7 +3,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const PAI_DIR = process.env.PAI_DIR || `${process.env.HOME}/.gemini`;
+const PAI_DIR = process.env.PAI_DIR;
+
+if (!PAI_DIR) {
+  console.error("Error: PAI_DIR environment variable is not set.");
+  process.exit(1);
+}
 
 interface ContextRule {
   keywords: string[];

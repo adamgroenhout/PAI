@@ -14,27 +14,32 @@ model_name=$(echo "$input" | jq -r '.model.display_name')
 # Get directory name
 dir_name=$(basename "$current_dir")
 
+# Ensure PAI_DIR is set
+if [ -z "$PAI_DIR" ]; then
+  echo "Error: PAI_DIR environment variable is not set." >&2
+  exit 1
+fi
+
 # Cache file and lock file for ccusage data
-CACHE_FILE="/tmp/.gemini_pai-usage_cache"
-LOCK_FILE="/tmp/.gemini_pai-usage.lock"
+CACHE_FILE="/tmp/pai-usage_cache"
+LOCK_FILE="/tmp/pai-usage.lock"
 CACHE_AGE=30   # 30 seconds for more real-time updates
 
 # Count items from specified directories
-gemini_dir="${PAI_DIR:-$HOME/.gemini}"
 commands_count=0
 mcps_count=0
 fobs_count=0
 fabric_count=0
 
 # Count commands (optimized - direct ls instead of find)
-if [ -d "$gemini_dir/commands" ]; then
-    commands_count=$(ls -1 "$gemini_dir/commands/"*.md 2>/dev/null | wc -l | tr -d ' ')
+if [ -d "$PAI_DIR/commands" ]; then
+    commands_count=$(ls -1 "$PAI_DIR/commands/"*.md 2>/dev/null | wc -l | tr -d ' ')
 fi
 
 # Count MCPs from settings.json (single parse)
 mcp_names_raw=""
-if [ -f "$gemini_dir/settings.json" ]; then
-    mcp_data=$(jq -r '.mcpServers | keys | join(" "), length' "$gemini_dir/settings.json" 2>/dev/null)
+if [ -f "$PAI_DIR/settings.json" ]; then
+    mcp_data=$(jq -r '.mcpServers | keys | join(" "), length' "$PAI_DIR/settings.json" 2>/dev/null)
     mcp_names_raw=$(echo "$mcp_data" | head -1)
     mcps_count=$(echo "$mcp_data" | tail -1)
 else
